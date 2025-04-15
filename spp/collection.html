@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Collections - SPP</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .collection-section {
+            padding: 80px 0;
+        }
+        
+        .collection-card {
+            position: relative;
+            margin-bottom: 30px;
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .collection-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+        }
+        
+        .collection-card img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            transition: all 0.5s ease;
+        }
+        
+        .collection-card:hover img {
+            transform: scale(1.1);
+        }
+        
+        .collection-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(0deg, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 100%);
+            color: white;
+            padding: 30px 20px 20px;
+            transition: all 0.3s ease;
+        }
+        
+        .collection-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+        
+        .collection-count {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        
+        .section-title {
+            position: relative;
+            margin-bottom: 50px;
+            padding-bottom: 15px;
+        }
+        
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 70px;
+            height: 3px;
+            background-color: var(--primary-color);
+        }
+        
+        .collection-tabs {
+            margin-bottom: 40px;
+        }
+        
+        .collection-tabs .nav-link {
+            color: var(--dark-color);
+            border: none;
+            padding: 10px 20px;
+            border-radius: 30px;
+            margin-right: 10px;
+            transition: all 0.3s ease;
+        }
+        
+        .collection-tabs .nav-link.active {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .collection-tabs .nav-link:hover:not(.active) {
+            background-color: #f8f9fa;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark custom-bg sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">SPP</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="collection.html">Collection</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html">Contact</a>
+                    </li>
+                </ul>
+                <div class="d-flex align-items-center">
+                    <div class="language-toggle me-3">
+                        <button id="lang-en" class="btn btn-sm btn-outline-light active">EN</button>
+                        <button id="lang-de" class="btn btn-sm btn-outline-light">DE</button>
+                    </div>
+                    <a href="cart.html" class="text-white me-3">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span id="cart-count" class="badge bg-danger">0</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Collection Section -->
+    <section class="collection-section">
+        <div class="container">
+            <h2 class="section-title" id="collection-title">Our Collections</h2>
+            
+            <!-- Collection Tabs -->
+            <ul class="nav nav-pills collection-tabs" id="collectionTab" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="all-tab" data-bs-toggle="pill" data-bs-target="#all" type="button" role="tab" aria-controls="all" aria-selected="true">All</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="years-tab" data-bs-toggle="pill" data-bs-target="#years" type="button" role="tab" aria-controls="years" aria-selected="false">Years</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="regions-tab" data-bs-toggle="pill" data-bs-target="#regions" type="button" role="tab" aria-controls="regions" aria-selected="false">Regions</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="categories-tab" data-bs-toggle="pill" data-bs-target="#categories" type="button" role="tab" aria-controls="categories" aria-selected="false">Categories</button>
+                </li>
+            </ul>
+            
+            <!-- Collection Tab Content -->
+            <div class="tab-content" id="collectionTabContent">
+                <!-- All Collections -->
+                <div class="tab-pane fade show active" id="all" role="tabpanel" aria-labelledby="all-tab">
+                    <div class="row" id="all-collections">
+                        <!-- Collections will be dynamically inserted here -->
+                    </div>
+                </div>
+                
+                <!-- Years -->
+                <div class="tab-pane fade" id="years" role="tabpanel" aria-labelledby="years-tab">
+                    <div class="row" id="year-collections">
+                        <!-- Year Collections will be dynamically inserted here -->
+                    </div>
+                </div>
+                
+                <!-- Regions -->
+                <div class="tab-pane fade" id="regions" role="tabpanel" aria-labelledby="regions-tab">
+                    <div class="row" id="region-collections">
+                        <!-- Region Collections will be dynamically inserted here -->
+                    </div>
+                </div>
+                
+                <!-- Categories -->
+                <div class="tab-pane fade" id="categories" role="tabpanel" aria-labelledby="categories-tab">
+                    <div class="row" id="category-collections">
+                        <!-- Category Collections will be dynamically inserted here -->
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Gallery Display (When Collection is Selected) -->
+            <div id="gallery-container" class="mt-5 d-none">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h3 id="gallery-title">Collection: <span id="current-collection">All</span></h3>
+                    <button id="back-to-collections" class="btn btn-outline-secondary">
+                        <i class="fas fa-arrow-left me-2"></i> <span id="back-text">Back to Collections</span>
+                    </button>
+                </div>
+                
+                <div class="row" id="gallery">
+                    <!-- Images will be dynamically inserted here -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="custom-bg text-white py-4">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <h5>SPP - Safari Press Photos</h5>
+                    <p>Premium news images for media professionals</p>
+                </div>
+                <div class="col-md-4">
+                    <h5>Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="index.html" class="text-white">Home</a></li>
+                        <li><a href="collection.html" class="text-white">Collection</a></li>
+                        <li><a href="about.html" class="text-white">About</a></li>
+                        <li><a href="contact.html" class="text-white">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h5>Connect With Us</h5>
+                    <div class="social-icons">
+                        <a href="#" class="text-white me-2"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-white me-2"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-white me-2"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div class="text-center">
+                <p>&copy; 2024 Safari Press Photos. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Notification -->
+    <style>
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: rgba(0,0,0,0.8);
+            color: white;
+            padding: 15px 20px;
+            border-radius: 5px;
+            transform: translateX(150%);
+            transition: all 0.5s ease;
+            z-index: 1000;
+        }
+        
+        .notification.show {
+            transform: translateX(0);
+        }
+        
+        /* Gallery Styles (Same as index.html) */
+        .gallery-item {
+            margin-bottom: 30px;
+            position: relative;
+            overflow: hidden;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            transition: all 0.3s ease;
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            bottom: -100px;
+            left: 0;
+            right: 0;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            bottom: 0;
+        }
+
+        .add-to-cart {
+            position: absolute;
+            top: 15px;
+            right: -50px;
+            background-color: var(--secondary-color);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .gallery-item:hover .add-to-cart {
+            right: 15px;
+        }
+    </style>
+
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Image Data
+            const images = [
+                { id: 1, src: 'img/1.jpeg', title: 'Protest in Frankfurt', date: '2023-06-15', location: 'Frankfurt, Germany', category: 'politics' },
+                { id: 2, src: 'img/2.jpg', title: 'Cultural Festival', date: '2023-07-22', location: 'Berlin, Germany', category: 'culture' },
+                { id: 3, src: 'img/3.jpg', title: 'Political Rally', date: '2023-08-10', location: 'Munich, Germany', category: 'politics' },
+                { id: 4, src: 'img/4.jpg', title: 'Environmental Protest', date: '2023-09-05', location: 'Hamburg, Germany', category: 'environment' },
+                { id: 5, src: 'img/5.jpg', title: 'Sports Championship', date: '2023-10-12', location: 'Cologne, Germany', category: 'sports' },
+                { id: 6, src: 'img/6.jpg', title: 'Urban Life', date: '2023-11-18', location: 'Dresden, Germany', category: 'society' },
+                { id: 7, src: 'img/7.jpeg', title: 'Medical Conference', date: '2023-12-01', location: 'Düsseldorf, Germany', category: 'health' },
+                { id: 8, src: 'img/8.jpeg', title: 'Technology Expo', date: '2024-01-15', location: 'Stuttgart, Germany', category: 'technology' },
+                { id: 9, src: 'img/9.jpeg', title: 'Economic Forum', date: '2024-02-20', location: 'Bonn, Germany', category: 'economy' },
+                { id: 10, src: 'img/10.jpg', title: 'Education Summit', date: '2024-03-05', location: 'Leipzig, Germany', category: 'education' },
+                { id: 11, src: 'img/11.jpg', title: 'Art Exhibition', date: '2024-03-25', location: 'Frankfurt, Germany', category: 'culture' },
+                { id: 12, src: 'img/12.jpg', title: 'Climate Protest', date: '2024-04-10', location: 'Berlin, Germany', category: 'environment' },
+                { id: 13, src: 'img/13.jpg', title: 'Election Campaign', date: '2024-04-20', location: 'Munich, Germany', category: 'politics' },
+                { id: 14, src: 'img/14.jpg', title: 'Music Festival', date: '2024-05-01', location: 'Hamburg, Germany', category: 'culture' },
+                { id: 15, src: 'img/15.jpg', title: 'Refugee Aid', date: '2024-05-15', location: 'Cologne, Germany', category: 'humanitarian' },
+                { id: 16, src: 'img/16.jpg', title: 'Urban Development', date: '2024-05-22', location: 'Dresden, Germany', category: 'society' },
+                { id: 17, src: 'img/17.jpg', title: 'Healthcare Reform Protest', date: '2024-06-01', location: 'Düsseldorf, Germany', category: 'health' },
+                { id: 18, src: 'img/18.jpg', title: 'Tech Conference', date: '2024-06-10', location: 'Stuttgart, Germany', category: 'technology' },
+                { id: 19, src: 'img/19.jpg', title: 'Financial Summit', date: '2024-06-15', location: 'Bonn, Germany', category: 'economy' },
+                { id: 20, src: 'img/20.jpeg', title: 'Education Reform', date: '2024-06-20', location: 'Leipzig, Germany', category: 'education' }
+            ];
+            
+            // Define Collections
+            const collections = {
+                years: [
+                    { id: 'year-2023', name: '2023', image: 'img/3.jpg', count: 0 },
+                    { id: 'year-2024', name: '2024', image: 'img/9.jpeg', count: 0 }
+                ],
+                regions: [
+                    { id: 'region-germany', name: 'Germany', image: 'img/2.jpg', count: 0 },
+                    { id: 'region-europe', name: 'Europe', image: 'img/14.jpg', count: 0 }
+                ],
+                categories: [
+                    { id: 'category-politics', name: 'Politics', image: 'img/1.jpeg', count: 0 },
+                    { id: 'category-culture', name: 'Culture', image: 'img/11.jpg', count: 0 },
+                    { id: 'category-environment', name: 'Environment', image: 'img/4.jpg', count: 0 },
+                    { id: 'category-society', name: 'Society', image: 'img/6.jpg', count: 0 }
+                ]
+            };
+            
+            // Count images for each collection
+            images.forEach(image => {
+                const imageDate = new Date(image.date);
+                const imageYear = imageDate.getFullYear();
+                
+                // Count by year
+                if (imageYear === 2023) {
+                    collections.years[0].count++;
+                } else if (imageYear === 2024) {
+                    collections.years[1].count++;
+                }
+                
+                // Count by region
+                if (image.location.includes('Germany')) {
+                    collections.regions[0].count++;
+                } else {
+                    collections.regions[1].count++;
+                }
+                
+                // Count by category
+                for (let i = 0; i < collections.categories.length; i++) {
+                    const category = collections.categories[i].name.toLowerCase();
+                    if (image.category === category) {
+                        collections.categories[i].count++;
+                        break;
+                    }
+                }
+            });
+            
+            // Site Language
+            let currentLanguage = 'en';
+            
+            // Shopping Cart
+            let cart = JSON.parse(localStorage.getItem('sppCart')) || [];
+            updateCartCount();
+            
+            // Initialize Collection View
+            populateCollections();
+            
+            // Language Toggle
+            document.getElementById('lang-en').addEventListener('click', function() {
+                if (currentLanguage !== 'en') {
+                    setLanguage('en');
+                }
+            });
+
+            document.getElementById('lang-de').addEventListener('click', function() {
+                if (currentLanguage !== 'de') {
+                    setLanguage('de');
+                }
+            });
+            
+            // Back to Collections Button
+            document.getElementById('back-to-collections').addEventListener('click', function() {
+                document.getElementById('gallery-container').classList.add('d-none');
+                document.getElementById('collectionTab').classList.remove('d-none');
+                document.getElementById('collectionTabContent').classList.remove('d-none');
+            });
+            
+            // Functions
+            function populateCollections() {
+                // Populate All Collections
+                const allCollectionsContainer = document.getElementById('all-collections');
+                let allCollectionsHTML = '';
+                
+                // Add Years to All
+                collections.years.forEach(collection => {
+                    allCollectionsHTML += createCollectionCard(collection);
+                });
+                
+                // Add Regions to All
+                collections.regions.forEach(collection => {
+                    allCollectionsHTML += createCollectionCard(collection);
+                });
+                
+                allCollectionsContainer.innerHTML = allCollectionsHTML;
+                
+                // Populate Year Collections
+                const yearCollectionsContainer = document.getElementById('year-collections');
+                let yearCollectionsHTML = '';
+                
+                collections.years.forEach(collection => {
+                    yearCollectionsHTML += createCollectionCard(collection);
+                });
+                
+                yearCollectionsContainer.innerHTML = yearCollectionsHTML;
+                
+                // Populate Region Collections
+                const regionCollectionsContainer = document.getElementById('region-collections');
+                let regionCollectionsHTML = '';
+                
+                collections.regions.forEach(collection => {
+                    regionCollectionsHTML += createCollectionCard(collection);
+                });
+                
+                regionCollectionsContainer.innerHTML = regionCollectionsHTML;
+                
+                // Populate Category Collections
+                const categoryCollectionsContainer = document.getElementById('category-collections');
+                let categoryCollectionsHTML = '';
+                
+                collections.categories.forEach(collection => {
+                    categoryCollectionsHTML += createCollectionCard(collection);
+                });
+                
+                categoryCollectionsContainer.innerHTML = categoryCollectionsHTML;
+                
+                // Add click event to all collection cards
+                document.querySelectorAll('.collection-card').forEach(card => {
+                    card.addEventListener('click', function() {
+                        const collectionId = this.getAttribute('data-id');
+                        showCollection(collectionId);
+                    });
+                });
+            }
+            
+            function createCollectionCard(collection) {
+                return `
+                    <div class="col-lg-4 col-md-6 mb-4">
+                        <div class="collection-card" data-id="${collection.id}">
+                            <img src="${collection.image}" alt="${collection.name}">
+                            <div class="collection-overlay">
+                                <h3 class="collection-title">${collection.name}</h3>
+                                <p class="collection-count">${collection.count} ${currentLanguage === 'en' ? 'images' : 'Bilder'}</p>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+            
+            function showCollection(collectionId) {
+                let filteredImages = [];
+                let collectionName = '';
+                
+                // Filter images based on collection ID
+                if (collectionId === 'year-2023') {
+                    filteredImages = images.filter(image => {
+                        const imageDate = new Date(image.date);
+                        return imageDate.getFullYear() === 2023;
+                    });
+                    collectionName = '2023';
+                } else if (collectionId === 'year-2024') {
+                    filteredImages = images.filter(image => {
+                        const imageDate = new Date(image.date);
+                        return imageDate.getFullYear() === 2024;
+                    });
+                    collectionName = '2024';
+                } else if (collectionId === 'region-germany') {
+                    filteredImages = images.filter(image => image.location.includes('Germany'));
+                    collectionName = currentLanguage === 'en' ? 'Germany' : 'Deutschland';
+                } else if (collectionId === 'region-europe') {
+                    filteredImages = images.filter(image => !image.location.includes('Germany'));
+                    collectionName = currentLanguage === 'en' ? 'Europe' : 'Europa';
+                } else if (collectionId.startsWith('category-')) {
+                    const category = collectionId.replace('category-', '');
+                    filteredImages = images.filter(image => image.category === category);
+                    collectionName = category.charAt(0).toUpperCase() + category.slice(1);
+                }
+                
+                // Display filtered images
+                document.getElementById('current-collection').textContent = collectionName;
+                document.getElementById('collectionTab').classList.add('d-none');
+                document.getElementById('collectionTabContent').classList.add('d-none');
+                document.getElementById('gallery-container').classList.remove('d-none');
+                
+                populateGallery(filteredImages);
+            }
+            
+            function populateGallery(imagesArray) {
+                const gallery = document.getElementById('gallery');
+                gallery.innerHTML = '';
+                
+                imagesArray.forEach(image => {
+                    const col = document.createElement('div');
+                    col.className = 'col-lg-4 col-md-6 col-12';
+                    
+                    const date = new Date(image.date);
+                    const formattedDate = date.toLocaleDateString(currentLanguage === 'en' ? 'en-US' : 'de-DE', {
+                        year: 'numeric',
+                        month: 'long',
+                        day: 'numeric'
+                    });
+                    
+                    col.innerHTML = `
+                        <div class="gallery-item">
+                            <img src="${image.src}" alt="${image.title}">
+                            <div class="gallery-overlay">
+                                <h5>${image.title}</h5>
+                                <p>${formattedDate} | ${image.location}</p>
+                            </div>
+                            <div class="add-to-cart" data-id="${image.id}">
+                                <i class="fas fa-shopping-cart"></i>
+                            </div>
+                        </div>
+                    `;
+                    
+                    gallery.appendChild(col);
+                    
+                    // Add click event to open image detail
+                    col.querySelector('img').addEventListener('click', function() {
+                        window.location.href = `detail.html?id=${image.id}`;
+                    });
+                    
+                    // Add to cart functionality
+                    col.querySelector('.add-to-cart').addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        const id = parseInt(this.getAttribute('data-id'));
+                        addToCart(id);
+                    });
+                });
+            }
+            
+            function addToCart(imageId) {
+                const image = images.find(img => img.id === imageId);
+                
+                if (!cart.some(item => item.id === imageId)) {
+                    cart.push({
+                        id: image.id,
+                        title: image.title,
+                        src: image.src,
+                        price: 25.00 // Default price for all images
+                    });
+                    
+                    localStorage.setItem('sppCart', JSON.stringify(cart));
+                    updateCartCount();
+                    
+                    // Show notification
+                    showNotification(currentLanguage === 'en' ? 'Added to cart!' : 'Zum Warenkorb hinzugefügt!');
+                } else {
+                    showNotification(currentLanguage === 'en' ? 'Already in cart!' : 'Bereits im Warenkorb!');
+                }
+            }
+            
+            function updateCartCount() {
+                const cartCount = document.getElementById('cart-count');
+                cartCount.textContent = cart.length;
+            }
+            
+            function showNotification(message) {
+                const notification = document.createElement('div');
+                notification.className = 'notification';
+                notification.innerText = message;
+                
+                document.body.appendChild(notification);
+                
+                setTimeout(() => {
+                    notification.classList.add('show');
+                }, 100);
+                
+                setTimeout(() => {
+                    notification.classList.remove('show');
+                    setTimeout(() => {
+                        document.body.removeChild(notification);
+                    }, 500);
+                }, 2000);
+            }
+            
+            function setLanguage(lang) {
+                currentLanguage = lang;
+                
+                // Update UI elements based on language
+                if (lang === 'en') {
+                    document.getElementById('lang-en').classList.add('active');
+                    document.getElementById('lang-de').classList.remove('active');
+                    // Update text elements
+                    updateTextElements('en');
+                } else {
+                    document.getElementById('lang-de').classList.add('active');
+                    document.getElementById('lang-en').classList.remove('active');
+                    // Update text elements
+                    updateTextElements('de');
+                }
+                
+                // Refresh collection cards to update collection count text
+                populateCollections();
+            }
+            
+            function updateTextElements(lang) {
+                const translations = {
+                    en: {
+                        home: 'Home',
+                        collection: 'Collection',
+                        about: 'About',
+                        contact: 'Contact',
+                        collectionTitle: 'Our Collections',
+                        all: 'All',
+                        years: 'Years',
+                        regions: 'Regions',
+                        categories: 'Categories',
+                        backToCollections: 'Back to Collections',
+                        footer: 'Premium news images for media professionals',
+                        quickLinks: 'Quick Links',
+                        connectWithUs: 'Connect With Us'
+                    },
+                    de: {
+                        home: 'Startseite',
+                        collection: 'Kollektion',
+                        about: 'Über Uns',
+                        contact: 'Kontakt',
+                        collectionTitle: 'Unsere Kollektionen',
+                        all: 'Alle',
+                        years: 'Jahre',
+                        regions: 'Regionen',
+                        categories: 'Kategorien',
+                        backToCollections: 'Zurück zu Kollektionen',
+                        footer: 'Premium-Nachrichtenbilder für Medienprofis',
+                        quickLinks: 'Schnelllinks',
+                        connectWithUs: 'Verbinde dich mit uns'
+                    }
+                };
+                
+                // Helper function to safely update text content
+                function safelyUpdateText(selector, text) {
+                    const element = document.querySelector(selector);
+                    if (element) {
+                        element.textContent = text;
+                    }
+                }
+
+                function safelyUpdateById(id, text) {
+                    const element = document.getElementById(id);
+                    if (element) {
+                        element.textContent = text;
+                    }
+                }
+                
+                // Update navbar
+                safelyUpdateText('.nav-link[href="index.html"]', translations[lang].home);
+                safelyUpdateText('.nav-link[href="collection.html"]', translations[lang].collection);
+                safelyUpdateText('.nav-link[href="about.html"]', translations[lang].about);
+                safelyUpdateText('.nav-link[href="contact.html"]', translations[lang].contact);
+                
+                // Update collections page elements
+                safelyUpdateById('collection-title', translations[lang].collectionTitle);
+                safelyUpdateById('all-tab', translations[lang].all);
+                safelyUpdateById('years-tab', translations[lang].years);
+                safelyUpdateById('regions-tab', translations[lang].regions);
+                safelyUpdateById('categories-tab', translations[lang].categories);
+                safelyUpdateById('back-text', translations[lang].backToCollections);
+                
+                // Update footer
+                safelyUpdateText('footer p:first-of-type', translations[lang].footer);
+                safelyUpdateText('footer h5:nth-of-type(2)', translations[lang].quickLinks);
+                safelyUpdateText('footer h5:nth-of-type(3)', translations[lang].connectWithUs);
+                
+                // Update footer links
+                safelyUpdateText('footer a[href="index.html"]', translations[lang].home);
+                safelyUpdateText('footer a[href="collection.html"]', translations[lang].collection);
+                safelyUpdateText('footer a[href="about.html"]', translations[lang].about);
+                safelyUpdateText('footer a[href="contact.html"]', translations[lang].contact);
+            }
+        });
+    </script>
+</body>
+</html> 

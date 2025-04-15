@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact - SPP</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .contact-section {
+            padding: 80px 0;
+        }
+        
+        .contact-info-item {
+            margin-bottom: 25px;
+        }
+        
+        .contact-info-item i {
+            width: 40px;
+            height: 40px;
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            float: left;
+        }
+        
+        .contact-info-item .content {
+            overflow: hidden;
+        }
+        
+        .contact-info-item h5 {
+            margin-bottom: 5px;
+        }
+        
+        .contact-form {
+            background-color: #f8f9fa;
+            padding: 30px;
+            border-radius: 10px;
+        }
+        
+        .section-title {
+            position: relative;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+        }
+        
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 70px;
+            height: 3px;
+            background-color: var(--primary-color);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark custom-bg sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">SPP</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="collection.html">Collection</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="contact.html">Contact</a>
+                    </li>
+                </ul>
+                <div class="d-flex align-items-center">
+                    <div class="language-toggle me-3">
+                        <button id="lang-en" class="btn btn-sm btn-outline-light active">EN</button>
+                        <button id="lang-de" class="btn btn-sm btn-outline-light">DE</button>
+                    </div>
+                    <a href="cart.html" class="text-white me-3">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span id="cart-count" class="badge bg-danger">0</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Contact Section -->
+    <section class="contact-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-5 mb-5 mb-lg-0">
+                    <h2 class="section-title" id="contact-title">Get In Touch</h2>
+                    <p class="mb-5" id="contact-description">Have questions about licensing, custom assignments, or any other inquiries? Feel free to reach out using the contact form or directly via the information below.</p>
+                    
+                    <div class="contact-info">
+                        <div class="contact-info-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <div class="content">
+                                <h5 id="address-title">Address</h5>
+                                <p>Frankfurt am Main, Germany</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-info-item">
+                            <i class="fas fa-envelope"></i>
+                            <div class="content">
+                                <h5 id="email-title">Email</h5>
+                                <p>contact@safaripressphotos.com</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-info-item">
+                            <i class="fas fa-phone-alt"></i>
+                            <div class="content">
+                                <h5 id="phone-title">Phone</h5>
+                                <p>+49 123 456 7890</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-info-item">
+                            <i class="fas fa-clock"></i>
+                            <div class="content">
+                                <h5 id="hours-title">Business Hours</h5>
+                                <p>Monday - Friday: 9am - 6pm</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-7">
+                    <div class="contact-form">
+                        <h3 class="mb-4" id="form-title">Send Us A Message</h3>
+                        <form id="contactForm">
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="name" class="form-label" id="name-label">Full Name</label>
+                                    <input type="text" class="form-control" id="name" required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="email" class="form-label" id="email-label">Email Address</label>
+                                    <input type="email" class="form-control" id="email" required>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="subject" class="form-label" id="subject-label">Subject</label>
+                                <input type="text" class="form-control" id="subject" required>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="inquiry" class="form-label" id="inquiry-label">Type of Inquiry</label>
+                                <select class="form-select" id="inquiry">
+                                    <option value="licensing" id="licensing-option">Image Licensing</option>
+                                    <option value="assignment" id="assignment-option">Custom Assignment</option>
+                                    <option value="partnership" id="partnership-option">Partnership Opportunity</option>
+                                    <option value="other" id="other-option">Other</option>
+                                </select>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="message" class="form-label" id="message-label">Your Message</label>
+                                <textarea class="form-control" id="message" rows="5" required></textarea>
+                            </div>
+                            
+                            <button type="submit" class="btn btn-primary" id="submit-button">Send Message</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="custom-bg text-white py-4">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <h5>SPP - Safari Press Photos</h5>
+                    <p>Premium news images for media professionals</p>
+                </div>
+                <div class="col-md-4">
+                    <h5>Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="index.html" class="text-white">Home</a></li>
+                        <li><a href="collection.html" class="text-white">Collection</a></li>
+                        <li><a href="about.html" class="text-white">About</a></li>
+                        <li><a href="contact.html" class="text-white">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h5>Connect With Us</h5>
+                    <div class="social-icons">
+                        <a href="#" class="text-white me-2"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-white me-2"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-white me-2"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div class="text-center">
+                <p>&copy; 2024 Safari Press Photos. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Notification -->
+    <style>
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: rgba(0,0,0,0.8);
+            color: white;
+            padding: 15px 20px;
+            border-radius: 5px;
+            transform: translateX(150%);
+            transition: all 0.5s ease;
+            z-index: 1000;
+        }
+        
+        .notification.show {
+            transform: translateX(0);
+        }
+    </style>
+
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Site Language
+            let currentLanguage = 'en';
+            
+            // Shopping Cart
+            let cart = JSON.parse(localStorage.getItem('sppCart')) || [];
+            updateCartCount();
+            
+            // Language Toggle
+            document.getElementById('lang-en').addEventListener('click', function() {
+                if (currentLanguage !== 'en') {
+                    setLanguage('en');
+                }
+            });
+
+            document.getElementById('lang-de').addEventListener('click', function() {
+                if (currentLanguage !== 'de') {
+                    setLanguage('de');
+                }
+            });
+            
+            // Form Submission
+            document.getElementById('contactForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Normally this would send data to a server
+                // For this prototype, just show a success message
+                showNotification(currentLanguage === 'en' ? 
+                    'Message sent successfully!' : 
+                    'Nachricht erfolgreich gesendet!');
+                    
+                // Reset form
+                this.reset();
+            });
+            
+            // Functions
+            function updateCartCount() {
+                const cartCount = document.getElementById('cart-count');
+                cartCount.textContent = cart.length;
+            }
+            
+            function showNotification(message) {
+                const notification = document.createElement('div');
+                notification.className = 'notification';
+                notification.innerText = message;
+                
+                document.body.appendChild(notification);
+                
+                setTimeout(() => {
+                    notification.classList.add('show');
+                }, 100);
+                
+                setTimeout(() => {
+                    notification.classList.remove('show');
+                    setTimeout(() => {
+                        document.body.removeChild(notification);
+                    }, 500);
+                }, 3000);
+            }
+            
+            function setLanguage(lang) {
+                currentLanguage = lang;
+                
+                // Update UI elements based on language
+                if (lang === 'en') {
+                    document.getElementById('lang-en').classList.add('active');
+                    document.getElementById('lang-de').classList.remove('active');
+                    // Update text elements
+                    updateTextElements('en');
+                } else {
+                    document.getElementById('lang-de').classList.add('active');
+                    document.getElementById('lang-en').classList.remove('active');
+                    // Update text elements
+                    updateTextElements('de');
+                }
+            }
+            
+            function updateTextElements(lang) {
+                const translations = {
+                    en: {
+                        home: 'Home',
+                        collection: 'Collection',
+                        about: 'About',
+                        contact: 'Contact',
+                        contactTitle: 'Get In Touch',
+                        contactDesc: 'Have questions about licensing, custom assignments, or any other inquiries? Feel free to reach out using the contact form or directly via the information below.',
+                        addressTitle: 'Address',
+                        emailTitle: 'Email',
+                        phoneTitle: 'Phone',
+                        hoursTitle: 'Business Hours',
+                        formTitle: 'Send Us A Message',
+                        nameLabel: 'Full Name',
+                        emailLabel: 'Email Address',
+                        subjectLabel: 'Subject',
+                        inquiryLabel: 'Type of Inquiry',
+                        licensingOption: 'Image Licensing',
+                        assignmentOption: 'Custom Assignment',
+                        partnershipOption: 'Partnership Opportunity',
+                        otherOption: 'Other',
+                        messageLabel: 'Your Message',
+                        submitButton: 'Send Message',
+                        footer: 'Premium news images for media professionals',
+                        quickLinks: 'Quick Links',
+                        connectWithUs: 'Connect With Us'
+                    },
+                    de: {
+                        home: 'Startseite',
+                        collection: 'Kollektion',
+                        about: 'Über Uns',
+                        contact: 'Kontakt',
+                        contactTitle: 'Kontaktieren Sie uns',
+                        contactDesc: 'Haben Sie Fragen zur Lizenzierung, individuellen Aufträgen oder andere Anfragen? Kontaktieren Sie uns über das Formular oder direkt über die unten angegebenen Informationen.',
+                        addressTitle: 'Adresse',
+                        emailTitle: 'E-Mail',
+                        phoneTitle: 'Telefon',
+                        hoursTitle: 'Geschäftszeiten',
+                        formTitle: 'Senden Sie uns eine Nachricht',
+                        nameLabel: 'Vollständiger Name',
+                        emailLabel: 'E-Mail-Adresse',
+                        subjectLabel: 'Betreff',
+                        inquiryLabel: 'Art der Anfrage',
+                        licensingOption: 'Bildlizenzierung',
+                        assignmentOption: 'Individueller Auftrag',
+                        partnershipOption: 'Kooperationsmöglichkeit',
+                        otherOption: 'Sonstiges',
+                        messageLabel: 'Ihre Nachricht',
+                        submitButton: 'Nachricht senden',
+                        footer: 'Premium-Nachrichtenbilder für Medienprofis',
+                        quickLinks: 'Schnelllinks',
+                        connectWithUs: 'Verbinde dich mit uns'
+                    }
+                };
+                
+                // Helper function to safely update text content
+                function safelyUpdateText(selector, text) {
+                    const element = document.querySelector(selector);
+                    if (element) {
+                        element.textContent = text;
+                    }
+                }
+
+                function safelyUpdateById(id, text) {
+                    const element = document.getElementById(id);
+                    if (element) {
+                        element.textContent = text;
+                    }
+                }
+                
+                // Update navbar
+                safelyUpdateText('.nav-link[href="index.html"]', translations[lang].home);
+                safelyUpdateText('.nav-link[href="collection.html"]', translations[lang].collection);
+                safelyUpdateText('.nav-link[href="about.html"]', translations[lang].about);
+                safelyUpdateText('.nav-link[href="contact.html"]', translations[lang].contact);
+                
+                // Update contact section
+                safelyUpdateById('contact-title', translations[lang].contactTitle);
+                safelyUpdateById('contact-description', translations[lang].contactDesc);
+                safelyUpdateById('address-title', translations[lang].addressTitle);
+                safelyUpdateById('email-title', translations[lang].emailTitle);
+                safelyUpdateById('phone-title', translations[lang].phoneTitle);
+                safelyUpdateById('hours-title', translations[lang].hoursTitle);
+                
+                // Update form elements
+                safelyUpdateById('form-title', translations[lang].formTitle);
+                safelyUpdateById('name-label', translations[lang].nameLabel);
+                safelyUpdateById('email-label', translations[lang].emailLabel);
+                safelyUpdateById('subject-label', translations[lang].subjectLabel);
+                safelyUpdateById('inquiry-label', translations[lang].inquiryLabel);
+                safelyUpdateById('licensing-option', translations[lang].licensingOption);
+                safelyUpdateById('assignment-option', translations[lang].assignmentOption);
+                safelyUpdateById('partnership-option', translations[lang].partnershipOption);
+                safelyUpdateById('other-option', translations[lang].otherOption);
+                safelyUpdateById('message-label', translations[lang].messageLabel);
+                safelyUpdateById('submit-button', translations[lang].submitButton);
+                
+                // Update footer
+                safelyUpdateText('footer p:first-of-type', translations[lang].footer);
+                safelyUpdateText('footer h5:nth-of-type(2)', translations[lang].quickLinks);
+                safelyUpdateText('footer h5:nth-of-type(3)', translations[lang].connectWithUs);
+                
+                // Update footer links
+                safelyUpdateText('footer a[href="index.html"]', translations[lang].home);
+                safelyUpdateText('footer a[href="collection.html"]', translations[lang].collection);
+                safelyUpdateText('footer a[href="about.html"]', translations[lang].about);
+                safelyUpdateText('footer a[href="contact.html"]', translations[lang].contact);
+            }
+        });
+    </script>
+</body>
+</html> 
